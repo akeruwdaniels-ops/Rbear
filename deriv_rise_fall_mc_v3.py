@@ -74,7 +74,7 @@ CONFIG = {
     #   "R_75"   (Volatility 75 Index)
     #   "R_50"   (Volatility 50 Index)
     #   "1HZ100V" (Volatility 100 (1s) Index)
-    "symbol"    : "RDBEAR",
+    "symbol"    : "1HZ100V",
 
     # -- Tick collection -------------------------------------------------------
     "collect_hours" : 0.6,          # ~36 min history
