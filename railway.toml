@@ -1,0 +1,30 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "sh -c 'echo $$ > /tmp/bot.pid && exec python -u deriv_rise_fall_mc_v3.py'"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+# Healthcheck mirrors the Dockerfile HEALTHCHECK so Railway's deploy
+# pipeline waits for the bot process to be confirmed alive before
+# marking the deployment healthy.
+[deploy.healthcheck]
+type        = "command"
+command     = "test -f /tmp/bot.pid && kill -0 $(cat /tmp/bot.pid) 2>/dev/null"
+intervalSeconds   = 30
+timeoutSeconds    = 10
+startPeriodSeconds = 60
+failureThreshold  = 3
+
+[[volumes]]
+# Persistent volume — tick CSVs and trade log survive redeploys.
+# Mount path must match DATA_DIR env var below.
+mountPath = "/data"
+
+[env]
+# Override in Railway dashboard → Variables (never commit the real token).
+DERIV_API_TOKEN = ""          # set in Railway dashboard
+DATA_DIR        = "/data"     # must match volume mountPath above
+PYTHONUNBUFFERED = "1"        # keeps logs streaming in Railway log viewer

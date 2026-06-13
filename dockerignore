@@ -1,0 +1,16 @@
+# Keep the Docker build context small — only the bot file is needed.
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.git/
+.gitignore
+*.log
+*.csv
+rf_bot_data/
+rb_bot_data/
+.env
+.env.*
+README*
+capture_1hz10v*
+deriv_rb_bot*

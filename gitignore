@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Bot runtime data — never commit tick CSVs or trade logs
+rf_bot_data/
+rb_bot_data/
+*.log
+*.csv
+
+# Secrets
+.env
+.env.*
+
+# Capture scripts (not needed in prod)
+capture_1hz10v*
